@@ -216,9 +216,9 @@ class Grid(object):
               coordinate
         """
         self.delta = numpy.array(list(
-            map(lambda e: (e[-1] - e[0]) / (len(e) - 1), self.edges)))
+            [(e[-1] - e[0]) / (len(e) - 1) for e in self.edges]))
         self.midpoints = self._midpoints(self.edges)
-        self.origin = numpy.array(list(map(lambda m: m[0], self.midpoints)))
+        self.origin = numpy.array(list([m[0] for m in self.midpoints]))
         if self.__interpolated is not None:
             # only update if we are using it
             self.__interpolated = self._interpolationFunctionFactory()
@@ -276,7 +276,7 @@ class Grid(object):
         if file_format not in available:
             raise ValueError(
                 "File format {} not available, choose one of {}".format(
-                    file_format, available.keys()))
+                    file_format, list(available.keys())))
         return file_format
 
     def _get_exporter(self, filename, file_format=None):

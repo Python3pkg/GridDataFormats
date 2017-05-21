@@ -128,7 +128,7 @@ Classes
 
 """
 
-from __future__ import with_statement
+
 
 import warnings
 import struct
@@ -248,7 +248,7 @@ class Plt(object):
         names = [r.key for r in self._header_struct]
         binheader = pltfile.read(nheader)
         def decode_header(bsaflag='@'):
-            h = dict(zip(names, struct.unpack(bsaflag+self._headerfmt, binheader)))
+            h = dict(list(zip(names, struct.unpack(bsaflag+self._headerfmt, binheader))))
             h['bsaflag'] = bsaflag
             return h
         for flag in '@=<>':

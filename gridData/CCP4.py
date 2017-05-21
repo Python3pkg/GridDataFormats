@@ -262,8 +262,8 @@ class CCP4(object):
         bintopheader = ccp4file.read(25 * 4)
 
         def decode_header(header, bsaflag='@'):
-            h = dict(zip(names, struct.unpack(bsaflag + self._headerfmt,
-                                              header)))
+            h = dict(list(zip(names, struct.unpack(bsaflag + self._headerfmt,
+                                              header))))
             h['bsaflag'] = bsaflag
             return h
 
